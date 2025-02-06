@@ -3,6 +3,7 @@ package jpa;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import metier.Administrateur;
 
 public class JpaTest {
 
@@ -24,7 +25,13 @@ public class JpaTest {
 		tx.begin();
 		try {
 
-			// TODO create and persist entity
+			int numOfAdmins = manager.createQuery("Select a From Administrateur a", Administrateur.class).getResultList().size();
+			if (numOfAdmins == 0) {
+				Administrateur admin = new Administrateur("admin", "admin", "admin@gmail.com", "admin");
+				manager.persist(admin);
+
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
