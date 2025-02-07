@@ -1,9 +1,11 @@
 package jpa;
 
 
+import DAO.UtilisateurDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import metier.Administrateur;
+import metier.Utilisateur;
 
 public class JpaTest {
 
@@ -25,13 +27,19 @@ public class JpaTest {
 		tx.begin();
 		try {
 
-			int numOfAdmins = manager.createQuery("Select a From Administrateur a", Administrateur.class).getResultList().size();
-			if (numOfAdmins == 0) {
-				Administrateur admin = new Administrateur("admin", "admin", "admin@gmail.com", "admin");
-				manager.persist(admin);
+			UtilisateurDAO utilisateurDAO = new UtilisateurDAO(manager);
+			if(utilisateurDAO.getUtilisateurByName("Alexis").isEmpty()) {
 
+				Utilisateur utilisateur = new Utilisateur();
+				utilisateur.setNom("Alexis");
+				utilisateur.setPrenom("Raulais");
+				utilisateur.setEmail("Alexisr0910@gmail.com");
+				utilisateur.setPassword("1234");
+				utilisateurDAO.creerUtilisateur(utilisateur);
 			}
-
+			else {
+				System.out.println("Utilisateur déjà existant");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

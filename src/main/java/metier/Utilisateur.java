@@ -24,14 +24,25 @@ import java.util.List;
     @OneToMany(mappedBy = "utilisateur")
     private List<Ticket> tickets;
 
-    public Utilisateur( String nom, String prenom, String email, String password) {
+    public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
     }
 
-   public Utilisateur() {
 
-   }
 }
