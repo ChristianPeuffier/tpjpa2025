@@ -1,11 +1,13 @@
 package metier;
 
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "ticket")
-public class Ticket {
+public class Ticket implements Serializable {
     @Id
     @GeneratedValue
     private int id;
